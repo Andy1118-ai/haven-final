@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mugata.renewalhaven",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "web": {
       "bundler": "metro",
@@ -30,6 +34,9 @@
         "projectId": "5c08de95-33fb-4a7b-b756-82a8c3d38584"
       }
     },
-    "owner": "mugata"
+    "owner": "mugata",
+    "android": {
+      "package": "com.mugata.renewalhaven"
+    }
   }
 }
