@@ -1,0 +1,187 @@
+// This is your Prisma schema file
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String
+  password      String
+  phoneNumber   String?
+  dateOfBirth   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          UserRole  @default(CLIENT)
+  profile       Profile?
+  bookings      Booking[]
+  chatHistory   ChatMessage[]
+  emergencyContacts EmergencyContact[]
+  moodEntries   MoodEntry[]
+  goals         Goal[]
+  savedContent  SavedContent[]
+  preferences   UserPreferences?
+}
+
+model Profile {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  bio           String?
+  avatar        String?
+  address       String?
+  preferences   Json?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Therapist {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String
+  password      String
+  specialization String[]
+  bio           String?
+  avatar        String?
+  availability  Json?
+  rating        Float     @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+  chatHistory   ChatMessage[]
+}
+
+model Booking {
+  id            String    @id @default(uuid())
+  userId        String
+  therapistId   String
+  user          User      @relation(fields: [userId], references: [id])
+  therapist     Therapist @relation(fields: [therapistId], references: [id])
+  startTime     DateTime
+  endTime       DateTime
+  status        BookingStatus @default(PENDING)
+  type          SessionType
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Content {
+  id            String    @id @default(uuid())
+  title         String
+  content       String
+  type          ContentType
+  tags          String[]
+  author        String
+  publishedAt   DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  savedBy       SavedContent[]
+}
+
+model SavedContent {
+  id            String    @id @default(uuid())
+  userId        String
+  contentId     String
+  user          User      @relation(fields: [userId], references: [id])
+  content       Content   @relation(fields: [contentId], references: [id])
+  savedAt       DateTime  @default(now())
+}
+
+model ChatMessage {
+  id            String    @id @default(uuid())
+  senderId      String
+  receiverId    String
+  senderType    SenderType
+  content       String
+  timestamp     DateTime  @default(now())
+  user          User?     @relation(fields: [senderId], references: [id])
+  therapist     Therapist? @relation(fields: [receiverId], references: [id])
+}
+
+model EmergencyContact {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  name          String
+  phoneNumber   String
+  relationship  String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model MoodEntry {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  mood          Int
+  notes         String?
+  timestamp     DateTime  @default(now())
+}
+
+model Goal {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  title         String
+  description   String
+  targetDate    DateTime?
+  status        GoalStatus @default(IN_PROGRESS)
+  progress      Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model UserPreferences {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  theme         String    @default("light")
+  notifications Boolean   @default(true)
+  language      String    @default("en")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  THERAPIST
+  CLIENT
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum SessionType {
+  INDIVIDUAL
+  GROUP
+  EMERGENCY
+}
+
+enum ContentType {
+  ARTICLE
+  VIDEO
+  AUDIO
+  EXERCISE
+}
+
+enum SenderType {
+  USER
+  THERAPIST
+  AI
+}
+
+enum GoalStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+} 
