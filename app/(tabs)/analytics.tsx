@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAnalytics } from '../../hooks/useAnalytics';
-import { useTheme } from '../../hooks/useTheme';
+import { colors } from '../../constants/theme';
 
 const MOOD_EMOJIS: Record<string, string> = {
   happy: '😊',
@@ -22,7 +22,6 @@ const MOOD_EMOJIS: Record<string, string> = {
 };
 
 export default function AnalyticsScreen() {
-  const { theme } = useTheme();
   const {
     isLoading,
     error,
@@ -60,42 +59,42 @@ export default function AnalyticsScreen() {
 
     return (
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: theme.text }]}>Weekly Overview</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Weekly Overview</Text>
         {weeklyProgress && (
           <View style={styles.statsContainer}>
-            <View style={[styles.statCard, { backgroundColor: theme.card }]}>
-              <Text style={[styles.statValue, { color: theme.text }]}>
+            <View style={[styles.statCard, { backgroundColor: colors.white }]}>
+              <Text style={[styles.statValue, { color: colors.text.primary }]}>
                 {weeklyProgress.totalSessions}
               </Text>
-              <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Sessions</Text>
+              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Sessions</Text>
             </View>
-            <View style={[styles.statCard, { backgroundColor: theme.card }]}>
-              <Text style={[styles.statValue, { color: theme.text }]}>
+            <View style={[styles.statCard, { backgroundColor: colors.white }]}>
+              <Text style={[styles.statValue, { color: colors.text.primary }]}>
                 {Math.round(weeklyProgress.totalDuration / 60)}h
               </Text>
-              <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Total Time</Text>
+              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Total Time</Text>
             </View>
-            <View style={[styles.statCard, { backgroundColor: theme.card }]}>
-              <Text style={[styles.statValue, { color: theme.text }]}>
+            <View style={[styles.statCard, { backgroundColor: colors.white }]}>
+              <Text style={[styles.statValue, { color: colors.text.primary }]}>
                 {Math.round(weeklyProgress.averageDuration)}m
               </Text>
-              <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Avg. Duration</Text>
+              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Avg. Duration</Text>
             </View>
           </View>
         )}
 
         {moodTrends && (
           <View style={styles.moodSection}>
-            <Text style={[styles.sectionTitle, { color: theme.text }]}>Mood Trends</Text>
-            <View style={[styles.moodCard, { backgroundColor: theme.card }]}>
+            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Mood Trends</Text>
+            <View style={[styles.moodCard, { backgroundColor: colors.white }]}>
               <Text style={[styles.moodEmoji, { fontSize: 40 }]}>
                 {MOOD_EMOJIS[moodTrends.mostCommonMood]}
               </Text>
               <View style={styles.moodStats}>
-                <Text style={[styles.moodLabel, { color: theme.text }]}>
+                <Text style={[styles.moodLabel, { color: colors.text.primary }]}>
                   Most Common Mood: {moodTrends.mostCommonMood}
                 </Text>
-                <Text style={[styles.moodLabel, { color: theme.text }]}>
+                <Text style={[styles.moodLabel, { color: colors.text.primary }]}>
                   Average Mood: {moodTrends.averageMood}
                 </Text>
               </View>
@@ -105,25 +104,25 @@ export default function AnalyticsScreen() {
 
         {contentProgress && (
           <View style={styles.contentSection}>
-            <Text style={[styles.sectionTitle, { color: theme.text }]}>Content Progress</Text>
-            <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
+            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Content Progress</Text>
+            <View style={[styles.contentCard, { backgroundColor: colors.white }]}>
               <View style={styles.contentStat}>
-                <Text style={[styles.contentValue, { color: theme.text }]}>
+                <Text style={[styles.contentValue, { color: colors.text.primary }]}>
                   {contentProgress.articlesRead}
                 </Text>
-                <Text style={[styles.contentLabel, { color: theme.textSecondary }]}>Articles</Text>
+                <Text style={[styles.contentLabel, { color: colors.text.secondary }]}>Articles</Text>
               </View>
               <View style={styles.contentStat}>
-                <Text style={[styles.contentValue, { color: theme.text }]}>
+                <Text style={[styles.contentValue, { color: colors.text.primary }]}>
                   {contentProgress.exercisesCompleted}
                 </Text>
-                <Text style={[styles.contentLabel, { color: theme.textSecondary }]}>Exercises</Text>
+                <Text style={[styles.contentLabel, { color: colors.text.secondary }]}>Exercises</Text>
               </View>
               <View style={styles.contentStat}>
-                <Text style={[styles.contentValue, { color: theme.text }]}>
+                <Text style={[styles.contentValue, { color: colors.text.primary }]}>
                   {contentProgress.meditationsCompleted}
                 </Text>
-                <Text style={[styles.contentLabel, { color: theme.textSecondary }]}>Meditations</Text>
+                <Text style={[styles.contentLabel, { color: colors.text.secondary }]}>Meditations</Text>
               </View>
             </View>
           </View>
@@ -131,15 +130,15 @@ export default function AnalyticsScreen() {
 
         {sessionInsights && (
           <View style={styles.sessionSection}>
-            <Text style={[styles.sectionTitle, { color: theme.text }]}>Session Insights</Text>
-            <View style={[styles.sessionCard, { backgroundColor: theme.card }]}>
-              <Text style={[styles.sessionStat, { color: theme.text }]}>
+            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Session Insights</Text>
+            <View style={[styles.sessionCard, { backgroundColor: colors.white }]}>
+              <Text style={[styles.sessionStat, { color: colors.text.primary }]}>
                 Total Hours: {sessionInsights.totalHours}
               </Text>
-              <Text style={[styles.sessionStat, { color: theme.text }]}>
+              <Text style={[styles.sessionStat, { color: colors.text.primary }]}>
                 Avg. Session: {Math.round(sessionInsights.averageSessionLength)}m
               </Text>
-              <Text style={[styles.sessionStat, { color: theme.text }]}>
+              <Text style={[styles.sessionStat, { color: colors.text.primary }]}>
                 Consistency: {sessionInsights.consistencyScore}%
               </Text>
             </View>
@@ -148,10 +147,10 @@ export default function AnalyticsScreen() {
 
         {recommendations && (
           <View style={styles.recommendationsSection}>
-            <Text style={[styles.sectionTitle, { color: theme.text }]}>Recommendations</Text>
-            <View style={[styles.recommendationsCard, { backgroundColor: theme.card }]}>
+            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Recommendations</Text>
+            <View style={[styles.recommendationsCard, { backgroundColor: colors.white }]}>
               {recommendations.map((rec, index) => (
-                <Text key={index} style={[styles.recommendation, { color: theme.text }]}>
+                <Text key={index} style={[styles.recommendation, { color: colors.text.primary }]}>
                   • {rec}
                 </Text>
               ))}
@@ -168,25 +167,25 @@ export default function AnalyticsScreen() {
 
     return (
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: theme.text }]}>Mood Analysis</Text>
-        <View style={[styles.moodCard, { backgroundColor: theme.card }]}>
+        <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Mood Analysis</Text>
+        <View style={[styles.moodCard, { backgroundColor: colors.white }]}>
           <Text style={[styles.moodEmoji, { fontSize: 60 }]}>
             {MOOD_EMOJIS[moodTrends.mostCommonMood]}
           </Text>
           <View style={styles.moodStats}>
-            <Text style={[styles.moodLabel, { color: theme.text }]}>
+            <Text style={[styles.moodLabel, { color: colors.text.primary }]}>
               Most Common Mood: {moodTrends.mostCommonMood}
             </Text>
-            <Text style={[styles.moodLabel, { color: theme.text }]}>
+            <Text style={[styles.moodLabel, { color: colors.text.primary }]}>
               Average Mood: {moodTrends.averageMood}
             </Text>
           </View>
         </View>
         <View style={styles.weeklyTrend}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Weekly Trend</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Weekly Trend</Text>
           {moodTrends.weeklyTrend.map((day, index) => (
             <View key={index} style={styles.trendDay}>
-              <Text style={[styles.dayLabel, { color: theme.textSecondary }]}>{day.day}</Text>
+              <Text style={[styles.dayLabel, { color: colors.text.secondary }]}>{day.day}</Text>
               <Text style={[styles.dayMood, { fontSize: 24 }]}>{MOOD_EMOJIS[day.mood]}</Text>
             </View>
           ))}
@@ -201,32 +200,32 @@ export default function AnalyticsScreen() {
 
     return (
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: theme.text }]}>Content Progress</Text>
-        <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
+        <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Content Progress</Text>
+        <View style={[styles.contentCard, { backgroundColor: colors.white }]}>
           <View style={styles.contentStat}>
-            <Text style={[styles.contentValue, { color: theme.text }]}>
+            <Text style={[styles.contentValue, { color: colors.text.primary }]}>
               {contentProgress.articlesRead}
             </Text>
-            <Text style={[styles.contentLabel, { color: theme.textSecondary }]}>Articles</Text>
+            <Text style={[styles.contentLabel, { color: colors.text.secondary }]}>Articles</Text>
           </View>
           <View style={styles.contentStat}>
-            <Text style={[styles.contentValue, { color: theme.text }]}>
+            <Text style={[styles.contentValue, { color: colors.text.primary }]}>
               {contentProgress.exercisesCompleted}
             </Text>
-            <Text style={[styles.contentLabel, { color: theme.textSecondary }]}>Exercises</Text>
+            <Text style={[styles.contentLabel, { color: colors.text.secondary }]}>Exercises</Text>
           </View>
           <View style={styles.contentStat}>
-            <Text style={[styles.contentValue, { color: theme.text }]}>
+            <Text style={[styles.contentValue, { color: colors.text.primary }]}>
               {contentProgress.meditationsCompleted}
             </Text>
-            <Text style={[styles.contentLabel, { color: theme.textSecondary }]}>Meditations</Text>
+            <Text style={[styles.contentLabel, { color: colors.text.secondary }]}>Meditations</Text>
           </View>
         </View>
         <View style={styles.favoriteCategories}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Favorite Categories</Text>
-          <View style={[styles.categoriesCard, { backgroundColor: theme.card }]}>
+          <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Favorite Categories</Text>
+          <View style={[styles.categoriesCard, { backgroundColor: colors.white }]}>
             {contentProgress.favoriteCategories.map((category, index) => (
-              <Text key={index} style={[styles.category, { color: theme.text }]}>
+              <Text key={index} style={[styles.category, { color: colors.text.primary }]}>
                 • {category}
               </Text>
             ))}
@@ -243,34 +242,34 @@ export default function AnalyticsScreen() {
 
     return (
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: theme.text }]}>Session Analytics</Text>
-        <View style={[styles.sessionCard, { backgroundColor: theme.card }]}>
-          <Text style={[styles.sessionStat, { color: theme.text }]}>
+        <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Session Analytics</Text>
+        <View style={[styles.sessionCard, { backgroundColor: colors.white }]}>
+          <Text style={[styles.sessionStat, { color: colors.text.primary }]}>
             Total Hours: {sessionInsights.totalHours}
           </Text>
-          <Text style={[styles.sessionStat, { color: theme.text }]}>
+          <Text style={[styles.sessionStat, { color: colors.text.primary }]}>
             Avg. Session: {Math.round(sessionInsights.averageSessionLength)}m
           </Text>
-          <Text style={[styles.sessionStat, { color: theme.text }]}>
+          <Text style={[styles.sessionStat, { color: colors.text.primary }]}>
             Consistency: {sessionInsights.consistencyScore}%
           </Text>
         </View>
         <View style={styles.preferredTimes}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Preferred Times</Text>
-          <View style={[styles.timesCard, { backgroundColor: theme.card }]}>
+          <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Preferred Times</Text>
+          <View style={[styles.timesCard, { backgroundColor: colors.white }]}>
             {sessionInsights.preferredTimes.map((time, index) => (
-              <Text key={index} style={[styles.timeSlot, { color: theme.text }]}>
+              <Text key={index} style={[styles.timeSlot, { color: colors.text.primary }]}>
                 • {time}
               </Text>
             ))}
           </View>
         </View>
         <TouchableOpacity
-          style={[styles.addSessionButton, { backgroundColor: theme.primary }]}
+          style={[styles.addSessionButton, { backgroundColor: colors.primary }]}
           onPress={handleAddSession}
         >
-          <Ionicons name="add-circle-outline" size={24} color={theme.text} />
-          <Text style={[styles.addSessionText, { color: theme.text }]}>Add Session</Text>
+          <Ionicons name="add-circle-outline" size={24} color={colors.white} />
+          <Text style={[styles.addSessionText, { color: colors.white }]}>Add Session</Text>
         </TouchableOpacity>
       </View>
     );
@@ -278,40 +277,40 @@ export default function AnalyticsScreen() {
 
   if (isLoading) {
     return (
-      <View style={[styles.container, { backgroundColor: theme.background }]}>
-        <ActivityIndicator size="large" color={theme.primary} />
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
   }
 
   if (error) {
     return (
-      <View style={[styles.container, { backgroundColor: theme.background }]}>
-        <Text style={[styles.errorText, { color: theme.error }]}>{error}</Text>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <Text style={[styles.errorText, { color: colors.error }]}>{error}</Text>
       </View>
     );
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <View style={[styles.tabBar, { backgroundColor: theme.card }]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.tabBar, { backgroundColor: colors.white }]}>
         <TouchableOpacity
           style={[
             styles.tab,
-            selectedTab === 'overview' && { borderBottomColor: theme.primary },
+            selectedTab === 'overview' && { borderBottomColor: colors.primary },
           ]}
           onPress={() => setSelectedTab('overview')}
         >
           <Ionicons
             name="stats-chart"
             size={24}
-            color={selectedTab === 'overview' ? theme.primary : theme.textSecondary}
+            color={selectedTab === 'overview' ? colors.primary : colors.text.secondary}
           />
           <Text
             style={[
               styles.tabText,
               {
-                color: selectedTab === 'overview' ? theme.primary : theme.textSecondary,
+                color: selectedTab === 'overview' ? colors.primary : colors.text.secondary,
               },
             ]}
           >
@@ -319,19 +318,19 @@ export default function AnalyticsScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.tab, selectedTab === 'mood' && { borderBottomColor: theme.primary }]}
+          style={[styles.tab, selectedTab === 'mood' && { borderBottomColor: colors.primary }]}
           onPress={() => setSelectedTab('mood')}
         >
           <Ionicons
             name="happy"
             size={24}
-            color={selectedTab === 'mood' ? theme.primary : theme.textSecondary}
+            color={selectedTab === 'mood' ? colors.primary : colors.text.secondary}
           />
           <Text
             style={[
               styles.tabText,
               {
-                color: selectedTab === 'mood' ? theme.primary : theme.textSecondary,
+                color: selectedTab === 'mood' ? colors.primary : colors.text.secondary,
               },
             ]}
           >
@@ -339,19 +338,19 @@ export default function AnalyticsScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.tab, selectedTab === 'content' && { borderBottomColor: theme.primary }]}
+          style={[styles.tab, selectedTab === 'content' && { borderBottomColor: colors.primary }]}
           onPress={() => setSelectedTab('content')}
         >
           <Ionicons
             name="book"
             size={24}
-            color={selectedTab === 'content' ? theme.primary : theme.textSecondary}
+            color={selectedTab === 'content' ? colors.primary : colors.text.secondary}
           />
           <Text
             style={[
               styles.tabText,
               {
-                color: selectedTab === 'content' ? theme.primary : theme.textSecondary,
+                color: selectedTab === 'content' ? colors.primary : colors.text.secondary,
               },
             ]}
           >
@@ -359,19 +358,19 @@ export default function AnalyticsScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.tab, selectedTab === 'sessions' && { borderBottomColor: theme.primary }]}
+          style={[styles.tab, selectedTab === 'sessions' && { borderBottomColor: colors.primary }]}
           onPress={() => setSelectedTab('sessions')}
         >
           <Ionicons
             name="time"
             size={24}
-            color={selectedTab === 'sessions' ? theme.primary : theme.textSecondary}
+            color={selectedTab === 'sessions' ? colors.primary : colors.text.secondary}
           />
           <Text
             style={[
               styles.tabText,
               {
-                color: selectedTab === 'sessions' ? theme.primary : theme.textSecondary,
+                color: selectedTab === 'sessions' ? colors.primary : colors.text.secondary,
               },
             ]}
           >
@@ -560,4 +559,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 20,
   },
-}); 
+});
