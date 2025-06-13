@@ -58,7 +58,7 @@ export default function HomeScreen() {
       {/* Hero Section */}
       <Card style={styles.heroSection}>
         <Image
-          source={require('../../assets/images/hero.jpg')}
+          source={require('../../../assets/images/hero.jpg')}
           style={styles.heroImage}
           resizeMode="cover"
         />
